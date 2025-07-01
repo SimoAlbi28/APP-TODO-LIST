@@ -35,68 +35,34 @@ h1 {
   max-width: 700px;
 }
 
-/* Wrapper input + label per placeholder finto */
-.input-wrapper {
-  position: relative;
-  display: inline-block;
-  flex-grow: 1;
-  min-width: 120px;
-  max-width: 250px;
-}
-
-.input-wrapper input {
-  width: 100%;
+#task-time, #task-date, #task-text {
   padding: 0.7rem 1rem;
   font-size: 1rem;
   border-radius: 7px;
-  border: 2px solid #000; /* default nero per text, sarà sovrascritto sotto */
+  flex-grow: 1;
+  min-width: 120px;
+  max-width: 250px;
   outline-offset: 2px;
   outline-color: #00796b;
   transition: outline-color 0.3s ease;
 }
 
-.input-wrapper input:focus {
-  outline-color: #004d40;
-}
-
-/* Label come placeholder */
-.input-wrapper label {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  pointer-events: none;
-  user-select: none;
-  transition: 0.3s ease all;
-}
-
-/* Nascondi label quando input ha valore o focus */
-.input-wrapper input:focus + label,
-.input-wrapper input:not(:placeholder-shown) + label {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Colori specifici per ogni input */
-#task-text {
-  border-color: #000;
+#task-time {
+  border: 2px solid #00796b;
 }
 
 #task-date {
-  border-color: orange;
+  border: 2px solid orange;
 }
 
-#task-time {
-  border-color: #00796b;
-}
-
-/* Per input testo */
 #task-text {
-  /* Se usi .input-wrapper per text, altrimenti rimane normale */
+  border: 2px solid #000;
 }
 
-/* Bottone aggiungi */
+#task-text:focus, #task-date:focus, #task-time:focus {
+  outline-color: #004d40;
+}
+
 #add-task {
   background-color: #0d0aee;
   color: white;
@@ -131,9 +97,11 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  position: relative;
-  word-break: break-word;
+  align-items: center;       /* centrato */
+  text-align: center;        /* testo centrato */
   border: 5px solid black;
+  word-break: break-word;
+  position: relative;
 }
 
 .task-datetime {
@@ -142,55 +110,52 @@ h1 {
   font-weight: 700;
   font-size: 1.2rem;
   color: #004d40;
+  justify-content: center;   /* centrato */
   flex-wrap: wrap;
-  justify-content: flex-start;
+}
+
+.task-date, .task-time {
+  padding: 0.4rem 0.9rem;
+  border-radius: 5px;
+  min-width: 70px;
+  user-select: none;
+  text-align: center;
 }
 
 .task-date {
   background: orange;
   color: black;
-  padding: 0.4rem 0.9rem;
-  border-radius: 5px;
-  min-width: 90px;
-  text-align: center;
-  user-select: none;
 }
 
 .task-time {
   background: #00796b;
   color: #fff;
-  padding: 0.4rem 0.9rem;
-  border-radius: 5px;
-  min-width: 70px;
-  text-align: center;
-  user-select: none;
 }
 
 .task-desc {
   font-size: 1.15rem;
   color: #000;
-  margin-left: 0.2rem;
+  margin-left: 0;
   white-space: pre-wrap;
 }
 
 .task-buttons {
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+  justify-content: center;  /* centrato */
+  gap: 0.8rem;
   margin-top: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;       /* affiancati */
 }
 
 .task-btn {
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1.4rem;
-  font-size: 1.3rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
   user-select: none;
-  flex-shrink: 0;
-  min-width: 70px;
+  min-width: 60px;
   text-align: center;
 }
 
@@ -261,48 +226,125 @@ h1 {
   display: block;
 }
 
-/* Media Query Tablet (768px ~ 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  #input-container {
-    max-width: 600px;
-  }
-  .input-wrapper {
-    max-width: 180px;
-  }
-  #add-task {
-    max-width: 180px;
-  }
+#input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  align-items: flex-start;
 }
 
-/* Media Query Desktop (1025px+) */
-@media (min-width: 1025px) {
-  body {
-    padding: 3rem 2rem;
-  }
-  #input-container {
-    max-width: 700px;
-    gap: 1.5rem;
-  }
-  .input-wrapper {
-    max-width: 220px;
-    font-size: 1.2rem;
-  }
-  #add-task {
-    max-width: 220px;
-    font-size: 1.3rem;
-  }
-  .task-card {
-    padding: 1.6rem 1.4rem;
-    margin-bottom: 1.6rem;
-  }
-  .task-datetime {
-    font-size: 1.3rem;
-  }
-  .task-desc {
-    font-size: 1.25rem;
-  }
-  .task-btn {
-    font-size: 1.4rem;
-    min-width: 90px;
-  }
+#input-box {
+  border: 3px solid #004d40;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+
+  background: #b2dfdb;
+
+  /* centratura */
+  align-items: center;
+  text-align: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  width: 100%;
+  max-width: 280px;
+
+  /* centra testo label */
+  align-items: center;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #004d40;
+  font-size: 1rem;
+  user-select: none;
+  /* centra label */
+  text-align: center;
+}
+
+#add-task {
+  background-color: #0d0aee;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+#add-task:hover,
+#add-task:focus {
+  background-color: #004d40;
+}
+
+
+
+.input-group label {
+  font-weight: 600;
+  color: #004d40;
+  font-size: 1rem;
+  user-select: none;
+}
+
+#filter-container {
+  background-color: #b2dfdb;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  user-select: none;
+}
+
+#filter-date {
+  padding: 0.6rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 7px;
+  border: 2px solid #00796b;
+  outline-offset: 2px;
+  outline-color: #00796b;
+  min-width: 160px;
+  max-width: 220px;
+  transition: outline-color 0.3s ease;
+}
+
+#filter-date:focus {
+  outline-color: #004d40;
+}
+
+#reset-filter {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 120px;
+}
+
+#reset-filter:hover,
+#reset-filter:focus {
+  background-color: #b71c1c;
 }

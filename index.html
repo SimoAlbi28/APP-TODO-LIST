@@ -21,24 +21,31 @@
 
 <h1>📝 Cose da Fare 📝</h1>
 
-<div id="input-container">
-  <div class="input-wrapper">
+<div id="input-box">
+  <div class="input-group">
+    <label for="task-text">Descrizione</label>
     <input type="text" id="task-text" maxlength="100" />
-    <label for="task-text">Cosa devi fare?</label>
   </div>
 
-  <div class="input-wrapper">
-    <input type="date" id="task-date" />
+  <div class="input-group">
     <label for="task-date">Inserire data</label>
+    <input type="date" id="task-date" />
   </div>
 
-  <div class="input-wrapper">
+  <div class="input-group">
+    <label for="task-time">Inserire ora (opzionale)</label>
     <input type="time" id="task-time" />
-    <label for="task-time">Inserire ora</label>
   </div>
 
   <button id="add-task">Aggiungi</button>
 </div>
+
+<div id="filter-container" style="max-width:700px; margin: 0 auto 1.5rem; text-align:center;">
+    <h3>Cerca</h3>
+    <input type="date" id="filter-date" />
+  <button id="reset-filter">Mostra Tutti</button>
+</div>
+
 
 <div id="tasks-container"></div>
 

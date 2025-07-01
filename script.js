@@ -6,12 +6,17 @@ const taskTime = document.getElementById('task-time');
 const addTaskBtn = document.getElementById('add-task');
 const tasksContainer = document.getElementById('tasks-container');
 
+const filterDate = document.getElementById('filter-date');
+const resetFilterBtn = document.getElementById('reset-filter');
+
 const settingsBtn = document.getElementById('settings-btn');
 const settingsMenu = document.getElementById('settings-menu');
 const toggleNotifiche = document.getElementById('toggle-notifiche');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let notificheAttive = JSON.parse(localStorage.getItem('notificheAttive')) ?? true;
+
+let filteredDate = null;
 
 // Service Worker
 if ('serviceWorker' in navigator) {
@@ -28,6 +33,11 @@ if ('Notification' in window) {
   });
 }
 
+function formatDateIT(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return `${day}/${month}/${year}`;
+}
+
 function salva() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
   localStorage.setItem('notificheAttive', JSON.stringify(notificheAttive));
@@ -35,7 +45,24 @@ function salva() {
 
 function renderTasks() {
   tasksContainer.innerHTML = '';
-  tasks.forEach((task, index) => {
+
+  let tasksToShow = tasks;
+  if (filteredDate) {
+    tasksToShow = tasks.filter(t => t.date === filteredDate);
+  }
+
+  if (tasksToShow.length === 0) {
+    const msg = document.createElement('div');
+    msg.textContent = '🟢 Giorno libero!';
+    msg.style.color = 'green';
+    msg.style.fontWeight = '700';
+    msg.style.fontSize = '1.3rem';
+    msg.style.textAlign = 'center';
+    tasksContainer.appendChild(msg);
+    return;
+  }
+
+  tasksToShow.forEach((task, index) => {
     const card = document.createElement('div');
     card.className = 'task-card';
 
@@ -44,11 +71,11 @@ function renderTasks() {
 
     const dateSpan = document.createElement('span');
     dateSpan.className = 'task-date';
-    dateSpan.textContent = task.date;
+    dateSpan.textContent = formatDateIT(task.date);
 
     const timeSpan = document.createElement('span');
     timeSpan.className = 'task-time';
-    timeSpan.textContent = task.time;
+    timeSpan.textContent = task.time || '-';
 
     datetimeDiv.appendChild(dateSpan);
     datetimeDiv.appendChild(timeSpan);
@@ -63,14 +90,17 @@ function renderTasks() {
     const editBtn = document.createElement('button');
     editBtn.className = 'task-btn edit';
     editBtn.textContent = '✏️ Modifica';
-    editBtn.onclick = () => startEditTask(index);
+    // Qui serve l'indice corretto per modifica
+    // Se filtro attivo, dobbiamo mappare all'indice originale
+    let originalIndex = tasks.indexOf(task);
+    editBtn.onclick = () => startEditTask(originalIndex);
 
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'task-btn delete';
     deleteBtn.textContent = '🗑️ Elimina';
     deleteBtn.onclick = () => {
       if (confirm('Sei sicuro di voler eliminare questa attività?')) {
-        tasks.splice(index, 1);
+        tasks.splice(originalIndex, 1);
         salva();
         renderTasks();
       }
@@ -89,6 +119,8 @@ function renderTasks() {
 
 function scheduleNotification(task) {
   if (!notificheAttive || !('Notification' in window) || Notification.permission !== 'granted') return;
+
+  if (!task.time) return; // se non c'è ora, non schedulare notifiche
 
   const eventDate = new Date(`${task.date}T${task.time}`);
   const now = new Date();
@@ -131,8 +163,8 @@ function addTaskHandler() {
   const date = taskDate.value;
   const time = taskTime.value;
 
-  if (!description || !date || !time) {
-    alert('Completa tutti i campi!');
+  if (!description || !date) {
+    alert('Completa almeno descrizione e data!');
     return;
   }
 
@@ -145,6 +177,8 @@ function addTaskHandler() {
   taskText.value = '';
   taskDate.value = '';
   taskTime.value = '';
+  filteredDate = null;
+  filterDate.value = '';
 }
 
 addTaskBtn.onclick = addTaskHandler;
@@ -161,8 +195,8 @@ function startEditTask(index) {
     const date = taskDate.value;
     const time = taskTime.value;
 
-    if (!description || !date || !time) {
-      alert('Completa tutti i campi!');
+    if (!description || !date) {
+      alert('Completa almeno descrizione e data!');
       return;
     }
 
@@ -176,8 +210,28 @@ function startEditTask(index) {
     taskTime.value = '';
     addTaskBtn.textContent = 'Aggiungi';
     addTaskBtn.onclick = addTaskHandler;
+
+    filteredDate = null;
+    filterDate.value = '';
   };
 }
+
+// Filtra per data
+filterDate.onchange = () => {
+  if (filterDate.value) {
+    filteredDate = filterDate.value;
+  } else {
+    filteredDate = null;
+  }
+  renderTasks();
+};
+
+// Reset filtro
+resetFilterBtn.onclick = () => {
+  filteredDate = null;
+  filterDate.value = '';
+  renderTasks();
+};
 
 // Toggle impostazioni notifiche
 settingsBtn.onclick = () => {
