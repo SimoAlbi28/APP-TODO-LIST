@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div id="settings">
+<div id="settings">
   <button id="settings-btn">⚙️</button>
   <div id="settings-menu" class="hidden">
     <label>
@@ -22,9 +22,21 @@
 <h1>📝 Cose da Fare 📝</h1>
 
 <div id="input-container">
-  <input type="text" id="task-text" placeholder="Cosa devi fare?" maxlength="100" />
-  <input type="date" id="task-date" />
-  <input type="time" id="task-time" />
+  <div class="input-wrapper">
+    <input type="text" id="task-text" maxlength="100" />
+    <label for="task-text">Cosa devi fare?</label>
+  </div>
+
+  <div class="input-wrapper">
+    <input type="date" id="task-date" />
+    <label for="task-date">Inserire data</label>
+  </div>
+
+  <div class="input-wrapper">
+    <input type="time" id="task-time" />
+    <label for="task-time">Inserire ora</label>
+  </div>
+
   <button id="add-task">Aggiungi</button>
 </div>
 
