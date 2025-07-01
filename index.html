@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do Avanzata</title>
+<link rel="stylesheet" href="./style.css" />
+<link rel="manifest" href="./manifest.json" />
+</head>
+<body>
+
+    <div id="settings">
+  <button id="settings-btn">⚙️</button>
+  <div id="settings-menu" class="hidden">
+    <label>
+      <input type="checkbox" id="toggle-notifiche" checked />
+      Notifiche attive
+    </label>
+  </div>
+</div>
+
+<h1>📝 Cose da Fare 📝</h1>
+
+<div id="input-container">
+  <input type="text" id="task-text" placeholder="Cosa devi fare?" maxlength="100" />
+  <input type="date" id="task-date" />
+  <input type="time" id="task-time" />
+  <button id="add-task">Aggiungi</button>
+</div>
+
+<div id="tasks-container"></div>
+
+<script src="./script.js"></script>
+</body>
+</html>
