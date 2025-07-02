@@ -8,8 +8,8 @@ const FILES_TO_CACHE = [
   BASE_PATH + 'style.css',
   BASE_PATH + 'script.js',
   BASE_PATH + 'manifest.json',
-  BASE_PATH + 'icons/icon-192.png',
-  BASE_PATH + 'icons/icon-512.png'
+  BASE_PATH + 'img/icon-192.png',
+  BASE_PATH + 'img/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -49,8 +49,8 @@ self.addEventListener('push', event => {
   const title = data.title || 'Promemoria Attività';
   const options = {
     body: data.body || 'Hai un’attività programmata!',
-    icon: BASE_PATH + 'icons/icon-192.png',
-    badge: BASE_PATH + 'icons/icon-192.png',
+    icon: BASE_PATH + 'img/icon-192.png',
+    badge: BASE_PATH + 'img/icon-192.png',
     tag: data.tag || 'todo-reminder'
   };
   event.waitUntil(

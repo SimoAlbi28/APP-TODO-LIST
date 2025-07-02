@@ -8,12 +8,12 @@
   "theme_color": "#00796b",
   "icons": [
     {
-      "src": "/app-todo-list/img/icon-192.png",
+      "src": "/todo-list-app/img/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/app-todo-list/img/icon-512.png",
+      "src": "/todo-list-app/img/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
