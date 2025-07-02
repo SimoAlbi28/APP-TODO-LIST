@@ -220,7 +220,7 @@ window.onload = () => {
       taskTimeObj.setHours(parseInt(hh), parseInt(mm), 0, 0);
 
       if (taskTimeObj < now) {
-        alert('Non puoi inserire un orario già passato per oggi!');
+        alert('Devi inserire un orario > di quello attuale !');
         return;
       }
     }
