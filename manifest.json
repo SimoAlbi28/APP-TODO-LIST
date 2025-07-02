@@ -2,7 +2,7 @@
   "name": "To-Do List",
   "short_name": "To-Do",
   "description": "App to-do list con notifiche e gestione avanzata",
-  "start_url": "/app-todo-list/",
+  "start_url": "/todo-list-app/",
   "display": "standalone",
   "background_color": "#e0f7fa",
   "theme_color": "#00796b",

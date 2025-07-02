@@ -1,4 +1,4 @@
-const BASE_PATH = '/app-todo-list/';
+const BASE_PATH = '/todo-list-app/';
 
 
 const CACHE_NAME = 'todo-cache-v1';
