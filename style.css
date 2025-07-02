@@ -304,10 +304,13 @@ h1 {
 }
 
 h3 {
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     padding: 5px;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    max-width: 150px;
+    max-height:70px;
 }
 
 #filter-container {
@@ -373,14 +376,15 @@ h3 {
 }
 
 #filter-date {
-  padding: 0.6rem 1rem;
-  font-size: 1.1rem;
+  margin-top: 15px;
+  font-size: 15px;
   border-radius: 7px;
   border: 2px solid #00796b;
   outline-offset: 2px;
   outline-color: #00796b;
   min-width: 160px;
-  max-width: 220px;
+  max-width: 150px;
+  max-height:50px ;
   transition: outline-color 0.3s ease;
 }
 
@@ -393,11 +397,13 @@ h3 {
   color: white;
   border: none;
   border-radius: 7px;
-  padding: 0.6rem 1.5rem;
+  margin-top: 15px;
   font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s;
   min-width: 120px;
+  max-width: 150px;
+  max-height:50px ;
 }
 
 #reset-filter:hover,
