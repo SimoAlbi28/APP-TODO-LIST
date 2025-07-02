@@ -1,4 +1,4 @@
-const BASE_PATH = '/simoproject/todo-list-app/'; // modifica qui se serve
+const BASE_PATH = '/app-todo-list/';
 
 const taskText = document.getElementById('task-text');
 const taskDate = document.getElementById('task-date');

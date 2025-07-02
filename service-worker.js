@@ -1,4 +1,5 @@
-const BASE_PATH = '/simoproject/todo-list-app/';
+const BASE_PATH = '/app-todo-list/';
+
 
 const CACHE_NAME = 'todo-cache-v1';
 const FILES_TO_CACHE = [
