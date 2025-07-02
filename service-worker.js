@@ -1,5 +1,4 @@
-const BASE_PATH = '/todo-list-app/';
-
+const BASE_PATH = '/TODO-LIST-APP/';
 
 const CACHE_NAME = 'todo-cache-v1';
 const FILES_TO_CACHE = [
@@ -49,7 +48,7 @@ self.addEventListener('push', event => {
   const title = data.title || 'Promemoria Attività';
   const options = {
     body: data.body || 'Hai un’attività programmata!',
-    icon: BASE_PATH + '/img/icon-192.png',
+    icon: BASE_PATH + 'img/icon-192.png',
     badge: BASE_PATH + 'img/icon-192.png',
     tag: data.tag || 'todo-reminder'
   };

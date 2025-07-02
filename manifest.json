@@ -1,6 +1,6 @@
 {
-  "name": "To-Do-List",
-  "short_name": "To-Do-List",
+  "name": "To-Do List",
+  "short_name": "To-Do",
   "description": "App to-do list con notifiche e gestione avanzata",
   "start_url": "/TODO-LIST-APP/",
   "display": "standalone",
@@ -8,12 +8,12 @@
   "theme_color": "#00796b",
   "icons": [
     {
-      "src": "./img/icon-192.png",
+      "src": "/TODO-LIST-APP/img/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/icon-512.png",
+      "src": "/TODO-LIST-APP/img/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

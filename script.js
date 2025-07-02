@@ -1,5 +1,5 @@
 window.onload = () => {
-  const BASE_PATH = '/todo-list-app/';
+  const BASE_PATH = '/TODO-LIST-APP/';
 
   const taskText = document.getElementById('task-text');
   const taskDate = document.getElementById('task-date');
