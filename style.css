@@ -291,7 +291,7 @@ h1 {
 
 #add-task:hover,
 #add-task:focus {
-  background-color: #004d40;
+  background-color: #0d0aee;
 }
 
 
@@ -401,4 +401,8 @@ h3 {
 
 #reset-filter:hover {
   background-color: #ff0000;
+}
+
+.countdown {
+  color: red !important;
 }
