@@ -99,7 +99,7 @@ h1 {
   gap: 0.6rem;
   align-items: center;       /* centrato */
   text-align: center;        /* testo centrato */
-  border: 5px solid black;
+  border: 4px solid #004d40;
   word-break: break-word;
   position: relative;
 }
@@ -238,7 +238,7 @@ h1 {
 }
 
 #input-box {
-  border: 3px solid #004d40;
+  border: 4px solid #004d40;
   border-radius: 12px;
   padding: 1.5rem 2rem;
   max-width: 360px;
@@ -305,6 +305,7 @@ h1 {
 
 #filter-container {
   background-color: #b2dfdb;
+  border: 4px solid #004d40;
   border-radius: 10px;
   padding: 1rem 1.5rem;
   margin-bottom: 1.5rem;
