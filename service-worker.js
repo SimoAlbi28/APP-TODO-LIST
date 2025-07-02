@@ -49,7 +49,7 @@ self.addEventListener('push', event => {
   const title = data.title || 'Promemoria Attività';
   const options = {
     body: data.body || 'Hai un’attività programmata!',
-    icon: BASE_PATH + 'img/icon-192.png',
+    icon: BASE_PATH + '/img/icon-192.png',
     badge: BASE_PATH + 'img/icon-192.png',
     tag: data.tag || 'todo-reminder'
   };
