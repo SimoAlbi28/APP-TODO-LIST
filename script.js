@@ -91,7 +91,7 @@ window.onload = () => {
 
     if (tasksToShow.length === 0) {
       const msg = document.createElement('div');
-      msg.textContent = '🟢 Giorno libero!';
+      msg.textContent = '🟢 Libero !!!';
       msg.style.color = 'green';
       msg.style.fontWeight = '700';
       msg.style.fontSize = '1.3rem';
