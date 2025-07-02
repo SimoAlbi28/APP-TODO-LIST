@@ -118,11 +118,14 @@ function renderTasks() {
 }
 
 function scheduleNotification(task) {
-  if (!notificheAttive || !('Notification' in window) || Notification.permission !== 'granted') return;
+  const isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-  if (!task.time) return; // se non c'è ora, non schedulare notifiche
+  if (!isAppInstalled) return;       // notifiche SOLO se app installata
+  if (!notificheAttive) return;      // notifiche SOLO se attive
+  if (!('Notification' in window)) return;
+  if (Notification.permission !== 'granted') return;
 
-  const eventDate = new Date(`${task.date}T${task.time}`);
+  const eventDate = new Date(`${task.date}T${task.time || '00:00'}`);
   const now = new Date();
 
   const notifica1h = new Date(eventDate.getTime() - 60 * 60 * 1000);
