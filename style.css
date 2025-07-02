@@ -314,7 +314,7 @@ h3 {
 }
 
 #filter-container {
-  border: 2px solid #004d40;
+  border: 4px solid #004d40;
   padding: 1rem;
   border-radius: 8px;
   max-width: 350px;
@@ -368,19 +368,6 @@ h3 {
     flex: 1;
   }
 }
-
-/*#filter-date {
-  margin-top: 15px;
-  font-size: 15px;
-  border-radius: 7px;
-  border: 2px solid #00796b;
-  outline-offset: 2px;
-  outline-color: rgb(255, 102, 0);
-  min-width: 160px;
-  max-width: 150px;
-  max-height:50px ;
-  transition: outline-color 0.3s ease;
-}*/
 
 #filter-date {
   padding: 0.6rem 1rem;
