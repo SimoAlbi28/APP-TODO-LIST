@@ -1,4 +1,6 @@
-const BASE_PATH = './';
+const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+const BASE_PATH = isLocalhost ? './' : '/TODO-LIST-APP/';
 
 const CACHE_NAME = 'todo-cache-v6';
 const FILES_TO_CACHE = [
