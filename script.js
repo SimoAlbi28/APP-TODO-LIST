@@ -158,7 +158,7 @@ window.onload = () => {
 
       if (now >= expiry) {
         // Evento scaduto, mostra messaggio rosso
-        countdownDiv.textContent = `⚠️ Questo evento è scaduto e si auto-eliminerà il ${formatDateIT(autoDeleteDate.toISOString().split('T')[0])}`;
+        countdownDiv.textContent = `⚠️ Questo evento è scaduto! Si Auto-Eliminerà il ${formatDateIT(autoDeleteDate.toISOString().split('T')[0])}`;
         card.appendChild(countdownDiv);
       }
 
