@@ -1,5 +1,5 @@
 window.onload = () => {
-  const BASE_PATH = '/TODO-LIST-APP/';
+  const BASE_PATH = './';
 
   const taskText = document.getElementById('task-text');
   const taskDate = document.getElementById('task-date');
@@ -24,7 +24,7 @@ window.onload = () => {
   let editingIndex = null;
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(BASE_PATH + 'service-worker.js').then(() => {
+    navigator.serviceWorker.register('./service-worker.js').then(() => {
       console.log('✅ Service Worker registrato');
     });
   }
@@ -100,6 +100,8 @@ window.onload = () => {
       return;
     }
 
+    const now = new Date();
+
     tasksToShow.forEach(task => {
       const card = document.createElement('div');
       card.className = 'task-card';
@@ -127,47 +129,37 @@ window.onload = () => {
       countdownDiv.style.fontWeight = 'bold';
       countdownDiv.style.fontSize = '1rem';
 
-      const now = new Date();
+      // Calcola momento scadenza evento
+      let expiry = null;
       const taskDateTime = new Date(`${task.date}T${task.time || '00:00'}`);
 
-      if (task.time) {
-        const elapsed = now - taskDateTime;
-        if (elapsed >= 15 * 60 * 1000) {
-          tasks.splice(tasks.indexOf(task), 1);
-          salva();
-          renderTasks();
-          return;
-        } else if (now >= taskDateTime) {
-          const diff = 15 * 60 * 1000 - elapsed;
-          let seconds = Math.floor(diff / 1000);
-
-          const countdownInterval = setInterval(() => {
-            if (seconds <= 0) {
-              clearInterval(countdownInterval);
-              tasks.splice(tasks.indexOf(task), 1);
-              salva();
-              renderTasks();
-              return;
-            }
-            const m = Math.floor(seconds / 60);
-            const s = seconds % 60;
-            countdownDiv.textContent = `⌛ Auto-eliminazione tra ${m}m ${s}s`;
-            seconds--;
-          }, 1000);
-
-          card.appendChild(countdownDiv);
-        }
+      if (!task.time) {
+        // Solo data: scade 00:01 del giorno dopo
+        expiry = new Date(taskDateTime);
+        expiry.setDate(expiry.getDate() + 1);
+        expiry.setHours(0, 1, 0, 0);
       } else {
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
+        // Data + ora: scade un minuto dopo l'ora inserita
+        expiry = new Date(taskDateTime);
+        expiry.setMinutes(expiry.getMinutes() + 1);
+      }
 
-        const taskDateObj = new Date(task.date);
-        taskDateObj.setHours(0, 0, 0, 0);
+      // Data auto-eliminazione = 3 mesi dopo la scadenza
+      const autoDeleteDate = new Date(expiry);
+      autoDeleteDate.setMonth(autoDeleteDate.getMonth() + 3);
 
-        if (taskDateObj.getTime() <= todayStart.getTime()) {
-          countdownDiv.textContent = `⌛ Auto-eliminazione il ${formatDateIT(task.date)} alle 00:00`;
-          card.appendChild(countdownDiv);
-        }
+      if (now >= autoDeleteDate) {
+        // Auto-elimina
+        tasks.splice(tasks.indexOf(task), 1);
+        salva();
+        renderTasks();
+        return;
+      }
+
+      if (now >= expiry) {
+        // Evento scaduto, mostra messaggio rosso
+        countdownDiv.textContent = `⚠️ Questo evento è scaduto e si auto-eliminerà il ${formatDateIT(autoDeleteDate.toISOString().split('T')[0])}`;
+        card.appendChild(countdownDiv);
       }
 
       const buttonsDiv = document.createElement('div');
@@ -274,7 +266,8 @@ window.onload = () => {
     salva();
   };
 
+  // Aggiorna ogni secondo per scritte rosse ed eliminazioni automatiche
+  setInterval(renderTasks, 1000);
+
   renderTasks();
 };
-
-
